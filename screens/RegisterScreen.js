@@ -5,14 +5,17 @@ import { Input, Button, Icon } from 'react-native-elements';
 const RegisterScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+
 
     const handleRegister = () => {
         const userInfo = {
             username,
             password,
+            confirmPassword,
             firstName,
             lastName,
             email
@@ -20,6 +23,7 @@ const RegisterScreen = ({navigation}) => {
         console.log(JSON.stringify(userInfo));
     };
     
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -33,9 +37,19 @@ const RegisterScreen = ({navigation}) => {
                 />
                 <Input
                     placeholder='Password'
-                    leftIcon={{ type: 'font-awesome', name: 'key' }}
+                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
+                    secureTextEntry={true}
+                    containerStyle={styles.formInput}
+                    leftIconContainerStyle={styles.formIcon}
+                />
+                <Input
+                    placeholder='Confirm Password'
+                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
+                    onChangeText={(text) => setConfirmPassword(text)}
+                    value={confirmPassword}
+                    secureTextEntry={true}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                 />
@@ -76,7 +90,7 @@ const RegisterScreen = ({navigation}) => {
                             />
                         }
                         buttonStyle={{ 
-                            backgroundColor: '#49111C',
+                            backgroundColor: '#92817A',
                             borderRadius: 10
                         }}
                         titleStyle={{ 
@@ -99,7 +113,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     formInput: {
-        padding: 10
+        padding: 5
     },
     formButton: {
         margin: 10

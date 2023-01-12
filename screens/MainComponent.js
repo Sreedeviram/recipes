@@ -1,4 +1,4 @@
-import { Platform, View, StyleSheet, Image, Text } from 'react-native';
+import { Platform, View, StyleSheet, ImageBackground, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { createStackNavigator} from '@react-navigation/stack';
 import CategoryListScreen from './CategoryListScreen';
@@ -11,11 +11,13 @@ import {
 import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
+import FavoritesScreen from './FavoritesScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 
 
 const Drawer = createDrawerNavigator();
+const image = {uri: 'https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'};
 
 const screenOptions = {
     headerTintColor: '#F1DABF',
@@ -32,7 +34,7 @@ const HomeNavigator = () => {
                 name='Home'
                 component={HomeScreen}
                 options={({ navigation }) => ({
-                    title: 'Add a Pinch',
+                    title: 'Hot Pot',
                     headerLeft: () => (
                         <Icon
                             name='bars'
@@ -73,6 +75,30 @@ const LoginNavigator = () => {
     );
 };
 
+const FavoritesNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Favorites'
+                component={FavoritesScreen}
+                options={({ navigation }) => ({
+                    title: 'Favorite Recipes',
+                    headerLeft: () => (
+                        <Icon
+                            name='heart'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
+
+
 const CategoryListNavigator = () => {
     const Stack = createStackNavigator();
     return (
@@ -106,11 +132,14 @@ const CategoryListNavigator = () => {
     );
 };
 
+
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
             <View style={{ flex: 1 }}>
-                <Text style={styles.drawerHeaderText}>Add a Pinch</Text>
+                <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                <Text style={styles.drawerHeaderText}>Hot Pot</Text>
+                </ImageBackground>
             </View>
         </View>
         <DrawerItemList {...props} labelStyle={{ fontWeight: 'bold' }} />
@@ -177,6 +206,22 @@ const Main = () => {
                         )
                     }}
                 />
+                <Drawer.Screen
+                    name='Favorites'
+                    component={FavoritesNavigator}
+                    options={{
+                        title: 'My Favorites',
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='heart'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
+                />
             </Drawer.Navigator> 
         </View>
     );
@@ -185,7 +230,7 @@ const Main = () => {
 const styles = StyleSheet.create({
     drawerHeader: {
         backgroundColor: '#49111C',
-        height: 140,
+        height: 200,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -193,7 +238,7 @@ const styles = StyleSheet.create({
     },
     drawerHeaderText: {
         color: '#F1DABF',
-        marginLeft: 20,
+        marginLeft: 30,
         fontSize: 40,
         fontWeight: 'bold'
     },
@@ -201,6 +246,10 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: '#F1DABF',
         fontSize: 24
+    },
+    image: {
+        flex: 1,
+        justifyContent: "center"
     }
 });
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 
 
@@ -43,7 +43,7 @@ const LoginScreen = ({navigation}) => {
                         />
                     }
                     buttonStyle={{ 
-                        backgroundColor: '#49111C',
+                        backgroundColor: '#92817A',
                         borderRadius: 10
                     }}
                     titleStyle={{ 
@@ -61,12 +61,12 @@ const LoginScreen = ({navigation}) => {
                         <Icon
                             name='user-plus'
                             type='font-awesome'
-                            color='#49111C'
+                            color='#92817A'
                             iconStyle={{ marginRight: 10 }}
                         />
                     }
                     titleStyle={{ 
-                        color: '#49111C',
+                        color: '#92817A',
                         fontWeight: 'bold'
                     }}
                 />
