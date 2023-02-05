@@ -12,7 +12,7 @@ import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
 import FavoritesScreen from './FavoritesScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SearchScreen from './SearchScreen';
 import { Icon } from 'react-native-elements';
 
 
@@ -98,6 +98,29 @@ const FavoritesNavigator = () => {
     );
 };
 
+const SearchNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Search Recipes'
+                component={SearchScreen}
+                options={({ navigation }) => ({
+                    title: 'Search',
+                    headerLeft: () => (
+                        <Icon
+                            name='search'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
+
 
 const CategoryListNavigator = () => {
     const Stack = createStackNavigator();
@@ -124,9 +147,9 @@ const CategoryListNavigator = () => {
             <Stack.Screen
                 name='Recipe List'
                 component={RecipeListScreen}
-                //options={({ route }) => ({
+                options={({ route }) => ({
                     //title: route.params
-                //})}
+                })}
             />
         </Stack.Navigator>
     );
@@ -161,6 +184,22 @@ const Main = () => {
                 drawerStyle={{ backgroundColor: '#F1DABF'}}
                 screenOptions={{headerShown: false}}
             >
+                <Drawer.Screen
+                    name='Search'
+                    component={SearchNavigator}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='search'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
+                />
+
                 <Drawer.Screen
                     name='Login'
                     component={LoginNavigator}
