@@ -14,6 +14,7 @@ import RegisterScreen from './RegisterScreen';
 import FavoritesScreen from './FavoritesScreen';
 import SearchScreen from './SearchScreen';
 import { Icon } from 'react-native-elements';
+import DetailedRecipeScreen from './DetailedRecipeScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -117,6 +118,10 @@ const SearchNavigator = () => {
                     )
                 })}
             />
+            <Stack.Screen
+                name='Detailed Recipe'
+                component={DetailedRecipeScreen}
+            />   
         </Stack.Navigator>
     );
 };
@@ -144,12 +149,13 @@ const CategoryListNavigator = () => {
                     )
                 })}
             />
-            <Stack.Screen
+           <Stack.Screen
                 name='Recipe List'
-                component={RecipeListScreen}
-                options={({ route }) => ({
-                    //title: route.params
-                })}
+                component={RecipeListScreen}  
+            />
+            <Stack.Screen
+                name = 'Detailed Recipe'
+                component={DetailedRecipeScreen}
             />
         </Stack.Navigator>
     );
@@ -216,7 +222,7 @@ const Main = () => {
                     }}
                 />
                 <Drawer.Screen
-                    name='Home'
+                    name='Home 1'
                     component={HomeNavigator}
                     options={{ title: 'Home',
                         drawerIcon: ({ color }) => (
@@ -231,7 +237,7 @@ const Main = () => {
                     }}
                 />
                 <Drawer.Screen
-                    name='Categories'
+                    name='Categories 1'
                     component={CategoryListNavigator}
                     options={{ title: 'Categories',
                         drawerIcon: ({ color }) => (
@@ -246,7 +252,7 @@ const Main = () => {
                     }}
                 />
                 <Drawer.Screen
-                    name='Favorites'
+                    name='Favorites 1'
                     component={FavoritesNavigator}
                     options={{
                         title: 'My Favorites',

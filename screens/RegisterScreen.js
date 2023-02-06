@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
