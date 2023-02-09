@@ -5,12 +5,12 @@ import { RECIPES} from '../shared/recipes';
 
 const SearchScreen = ({navigation}) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredRecipes, setFilteredRecipes] = useState();
+  const [filteredRecipes, setFilteredRecipes] = useState('');
 
   const handleSearch = (text) => {
     setSearchTerm(text);
     const searchRecipes = RECIPES.filter((recipe) =>
-      recipe.title.toLowerCase().includes(text.toLowerCase())
+      recipe.name.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredRecipes(searchRecipes);
   };
@@ -32,7 +32,7 @@ const SearchScreen = ({navigation}) => {
         data={filteredRecipes}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Text onPress={() => onPressRecipe(item.id)}>{item.title}</Text>
+          <Text onPress={() => onPressRecipe(item.id)}>{item.name}</Text>
         )}
         
         

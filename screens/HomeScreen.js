@@ -3,8 +3,12 @@ import { FlatList, Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { RECIPES } from '../shared/recipes';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const[recipes, setRecipes] = useState(RECIPES);
+
+    const onPressRecipe = (id) => {
+        navigation.navigate("Detailed Recipe", {recipeId : id});
+    };
 
     const FeaturedItem = ({ item }) => {
         if (item.featured) {
@@ -19,8 +23,9 @@ const HomeScreen = () => {
                                     fontSize: 40,
                                     fontWeight: 'bold'
                                 }}
+                                onPress={() => onPressRecipe(item.id)}
                             >
-                                {item.title}
+                                {item.name}
                             </Text>
                         </View>
                     </Card.Image>

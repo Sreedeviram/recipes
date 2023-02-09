@@ -17,7 +17,7 @@ const DetailedRecipeScreen = ({route}) => {
     const renderDetailedRecipe = ({item : detailedRecipe}) => {
         return (
           <View>
-                <Image style={{width: '100%', height: 400}} source={{uri:detailedRecipe.photo_url}}/>
+                <Image style={{width: '100%', height: 250}} source={{uri:detailedRecipe.photo_url}}/>
                 <View>
                 <View>
                 <Button
@@ -42,14 +42,15 @@ const DetailedRecipeScreen = ({route}) => {
                 </View>
                 <ListItem>
                     <ListItem.Content>
-                        <ListItem.Title>{detailedRecipe.title}</ListItem.Title>
+                        <ListItem.Title>{detailedRecipe.name}</ListItem.Title>
                         {
                         detailedRecipe.ingredients.map(
                             (ingredients, key) => {
-                        return <ListItem.Subtitle>{
-                            getIngredientsNameById(ingredients[0]) + '  - ' + ingredients[1]}
+                        return (
+                            <ListItem.Subtitle>{
+                                getIngredientsNameById(ingredients[0]) + '  - ' + ingredients[1]}
                             </ListItem.Subtitle>
-                        })
+                        )})
                         }
                         <ListItem.Subtitle>{detailedRecipe.description}</ListItem.Subtitle>
                     </ListItem.Content>
@@ -65,7 +66,6 @@ const DetailedRecipeScreen = ({route}) => {
         />
       ); 
 };
-
 
 
 export default DetailedRecipeScreen;

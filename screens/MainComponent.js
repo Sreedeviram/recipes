@@ -46,6 +46,10 @@ const HomeNavigator = () => {
                     )
                 })}
             />
+            <Stack.Screen
+                name='Detailed Recipe'
+                component={DetailedRecipeScreen}
+            />  
         </Stack.Navigator>
     );
 };
@@ -95,6 +99,10 @@ const FavoritesNavigator = () => {
                     )
                 })}
             />
+            <Stack.Screen
+                name='Detailed Recipe'
+                component={DetailedRecipeScreen}
+            />  
         </Stack.Navigator>
     );
 };
@@ -185,7 +193,7 @@ const Main = () => {
             }}
         >
             <Drawer.Navigator
-                initialRouteName='Home'
+                initialRouteName='Home 1'
                 drawerContent={CustomDrawerContent}
                 drawerStyle={{ backgroundColor: '#F1DABF'}}
                 screenOptions={{headerShown: false}}
