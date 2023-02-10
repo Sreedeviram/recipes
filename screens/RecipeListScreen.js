@@ -5,19 +5,22 @@ import { RECIPES} from '../shared/recipes';
 import ApiClient from '../shared/ApiClient';
 
 const RecipeListScreen = ({navigation, route}) => {
-  const[recipes, setRecipes] = useState(RECIPES.filter(recipe => recipe.categoryId === route.params.categoryId));
+  const[recipes, setRecipes] = useState([]);
 
-  const categoryId = route.params.categoryId;
+  //const categoryId = route.params.categoryId;
 
   useEffect(() => {
     ApiClient.getRecipes()
-            .then(function (response) {
-                    console.log(response.data);
-                    setRecipes(response.data);
-            })
-            .catch(function (error) {
-                    console.log(error);
-            });
+      .then(function (response) {
+        console.log(response.data);
+        console.log("looking up  " + route.params.categoryId);
+        setRecipes(response.data.filter(recipe => {
+          console.log(recipe.recipeCategory._id)
+          return recipe.recipeCategory._id === route.params.categoryId; }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }, []);
   
   const renderRecipeList = ({item : recipe}) => {
@@ -26,7 +29,7 @@ const RecipeListScreen = ({navigation, route}) => {
         <Image style={{width: '100%', height: 400}} source={{uri:recipe.photo_url}} />
         <ListItem 
             onPress={() => 
-                navigation.navigate('Detailed Recipe', {screen: 'DetailedRecipe', recipeId : recipe._id})
+                navigation.navigate('Detailed Recipe', {screen: 'DetailedRecipe', recipe : recipe})
             }
         >
             <ListItem.Content>

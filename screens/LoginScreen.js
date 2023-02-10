@@ -1,16 +1,32 @@
-import { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, StyleSheet} from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
+import ApiClient from '../shared/ApiClient';
+import App from '../App';
 
 
 const LoginScreen = ({navigation}) => {
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState([]);
     const [password, setPassword] = useState('');
 
+    
     const handleLogin = () => {
         console.log('username:', username);
         console.log('password:', password);
+
+        const user = {"username": username, "password": password};
+        ApiClient.getUser(user)
+                .then(function (response) {
+                        console.log(response.data);
+                        App.username = username;
+                        App.token = response.data.token;
+                        navigation.navigate('Home', {screen: 'HomeScreen'})
+                })
+                .catch(function (error) {
+                        console.log(error);
+                });
     };
+
 
     return (
         <View style={styles.container}>

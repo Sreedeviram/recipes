@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,6 +21,8 @@ const RegisterScreen = () => {
             email
         };
         console.log(JSON.stringify(userInfo));
+        navigation.navigate('Home', {screen: 'HomeScreen'})
+
     };
     
 

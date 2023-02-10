@@ -6,8 +6,8 @@ import { RECIPES } from '../shared/recipes';
 const HomeScreen = ({navigation}) => {
     const[recipes, setRecipes] = useState(RECIPES);
 
-    const onPressRecipe = (id) => {
-        navigation.navigate("Detailed Recipe", {recipeId : id});
+    const onPressRecipe = (recipe) => {
+        navigation.navigate("Detailed Recipe", {recipe : recipe});
     };
 
     const FeaturedItem = ({ item }) => {
@@ -23,7 +23,7 @@ const HomeScreen = ({navigation}) => {
                                     fontSize: 40,
                                     fontWeight: 'bold'
                                 }}
-                                onPress={() => onPressRecipe(item.id)}
+                                onPress={() => onPressRecipe(item)}
                             >
                                 {item.name}
                             </Text>
